@@ -1,0 +1,17 @@
+use turmac;
+select * from cliente;
+select * from vendedor;
+select * from produto;
+select * from pedido;
+select * from item_pedido;
+alter table cliente add column telefone varchar(12);
+describe cliente;
+alter table cliente modify cidade varchar(30);
+alter table cliente add column sexo varchar(1);
+alter table cliente drop column sexo;
+alter table cliente change endereco endereco_cli varchar(40);
+/* QUAL O COMANDO PARA CORRIRGIR O VALOR DO PRODUTO EM 15%? */
+update cliente set nome_cli = 'Vitor Gomes' where cod_cli = 1;
+update produto set val_unit = val_unit * 1.15;
+select desc_prod,val_unit,(val_unit*1.15) from produto;
+delete from cliente where cod_cli = 3;
