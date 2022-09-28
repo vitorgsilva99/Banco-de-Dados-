@@ -1,0 +1,51 @@
+create database clinica_c;
+use clinica_c;
+create table ambulatorio(
+	nroa int primary key auto_increment,
+    andar int not null,
+    capacidade smallint);
+insert into ambulatorio (andar, capacidade) values (1,30),(1,50),(2,40),(2,25),(2,55);
+
+create table medico(
+	codigo_medico int primary key auto_increment,
+    nome varchar(40) not null,
+    idade smallint not null,
+    especialidade char(20),
+	cpf varchar(11) unique,
+    cidade varchar(30),
+	fk_nroa  int,
+    foreign key (fk_nroa) references ambulatorio(nroa)
+);
+create table paciente(
+	codigo_paciente int primary key auto_increment,
+    nome varchar(40) not null,
+	idade smallint not null,
+    cidade varchar(30),
+    /* unique nao é obrigatório */
+	cpf varchar(11) unique,
+    doenca varchar(40) not null
+);
+create table funcionario(
+	codf int primary key auto_increment,
+    nome varchar(40) not null,
+    idade smallint,
+	cpf varchar(40) unique,
+    cidade varchar(30),
+    salario decimal(10,2),
+    cargo varchar(20));
+
+insert into funcionario (nome,idade,cidade,salario,cpf) values ('Rita',32,'São Jose',1200,'20000100000'),
+															                                 ('Maria',55,'Palhoca',1220,'30000100000'),
+                                                               ('Caio',45,'Florianopolis',1100,'410000100000'),
+                                                               ('Carlos',44,'Florianopolis',1200,'510000110000'),
+                                                               ('Paula',33,'Florianopolis',2500,'610000111000');
+select * from funcionario;
+create table consulta (
+	num_consulta int primary key auto_increment,
+    fk_codm int,
+    fk_codp int,
+    data_consulta date,
+    hora time,
+    foreign key(fk_codm) references medico(codigo_medico),
+    foreign key(fk_codp) references paciente(codp)
+); 
