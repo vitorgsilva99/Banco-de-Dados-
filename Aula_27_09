@@ -35,7 +35,7 @@ create table funcionario(
     cargo varchar(20));
 
 insert into funcionario (nome,idade,cidade,salario,cpf) values ('Rita',32,'São Jose',1200,'20000100000'),
-															                                 ('Maria',55,'Palhoca',1220,'30000100000'),
+							       ('Maria',55,'Palhoca',1220,'30000100000'),
                                                                ('Caio',45,'Florianopolis',1100,'410000100000'),
                                                                ('Carlos',44,'Florianopolis',1200,'510000110000'),
                                                                ('Paula',33,'Florianopolis',2500,'610000111000');
