@@ -50,3 +50,5 @@ delete from funcionario where codf = 4; /* 5 */
 delete from consulta where hora >= '19:00'; /* 6 */
 delete from paciente where doenca = 'cancer' or idade < 10; /* 7 */
 delete from medico where cidade = 'Biguacu' or cidade = 'palhoca'; /* 8 */
+delete from medico where cidade in (select cidade from tabela);
+select upper(mome) from paciente;
