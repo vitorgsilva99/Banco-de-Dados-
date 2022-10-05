@@ -1,0 +1,52 @@
+use clinica_c;
+select * from funcionario;
+select * from ambulatorio;
+select * from medico;
+select * from paciente;
+select * from consulta;	
+
+desc ambulatorio;
+insert into ambulatorio (andar,capacidade)
+					value(1,30),
+                    (1,50),
+                    (2,40),
+                    (2,25),
+                    (2,55);
+                    
+desc medico;
+insert into medico(nome,idade,especialidade,cpf,cidade,fk_nroa) 
+				values ('Joao',40,'Ortopedia','10000100000','Florianopolis',1),
+					   ('Maria',42,'Traumatologia','10000110000','Blumenau',2),
+                       ('Pedro',51,'Pediatria','11000100000','São José',2),
+					   ('Carlos',28,'Ortopedia','11000110000','Joinville',4),
+					   ('Marcia',33,'Neurologia','11000111000','Biguacu',3);
+                       
+desc paciente;
+insert into paciente (nome,idade,cidade,cpf,doenca)
+			values('Ana','20','Florianopolis','20000200000','gripe'),
+				  ('Paulo','24','Palhoça','20000220000','fatura'),
+                  ('Lucia','30','Biguacu','22000200000','tendinite'),
+                  ('Carlos','28','Joinville','11000110000','sarampo');
+                  
+desc consulta;
+insert into consulta(fk_codm,fk_codp,data_consulta,hora) 
+					values (1,1,'2006/06/12','14:00'),
+                           (1,4,'2006/06/13','10:00'),
+						   (2,1,'2006/06/13','9:00'),
+						   (2,2,'2006/06/13','11:00'),
+                           (2,3,'2006/06/14','14:00'),
+                           (2,4,'2006/06/14','17:00'),
+                           (3,1,'2006/06/19','18:00'),
+                           (3,3,'2006/06/12','10:00'),
+					       (3,4,'2006/06/19','13:00'),
+                           (4,4,'2006/06/20','13:00'),
+                           (4,4,'2006/06/22','19:30');
+                   
+update paciente set cidade = ‘Ilhota’ where cidade = ‘palhoça’;  /* 1 */  
+update consulta set data_consulta= '2006/07/04', hora= '12:00' where fk_codm=1 and fk_codp = 4; /* 2 */
+update paciente set idade = idade + 1, doenca = 'hepatite' where codp = 1; /* 3 */  
+
+delete from funcionario where codf = 4; /* 5 */ 
+delete from consulta where hora >= '19:00'; /* 6 */
+delete from paciente where doenca = 'cancer' or idade < 10; /* 7 */
+delete from medico where cidade = 'Biguacu' or cidade = 'palhoca'; /* 8 */
