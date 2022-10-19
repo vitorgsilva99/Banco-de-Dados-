@@ -1,0 +1,67 @@
+use sakila;
+show tables;
+select * from actor;
+select first_name,last_name from actor;
+select first_name,last_name from actor order by first_name desc;
+select first_name,last_name from actor 
+				  where first_name like 'J%'
+				  order by first_name;
+select first_name,last_name from actor 
+				  where first_name like '%A'
+				  order by first_name;
+select first_name,last_name from actor 
+				  where first_name like 'A_G%'
+				  order by first_name;
+select first_name,last_name from actor 
+				  where first_name not like 'A%'
+				  order by first_name;
+select first_name as Nome,last_name as 'Sobrenome' from actor; 
+select first_name Nome,last_name Sobrenome from actor;
+select first_name Nome,last_name Sobrenome from actor where first_name like 'A%';
+select count(*) from actor where first_name like 'G%';
+select * from payment;
+select sum(amount) from payment where customer_id = 1;
+select * from payment where customer_id = 1;
+select * from customer;
+select * from payment,customer 
+		 where payment.customer_id = 1 and payment.customer_id = customer.customer_id;
+select customer.first_name,payment.amount from payment,customer 
+		 where payment.customer_id = 1 and payment.customer_id = customer.customer_id;
+select customer.first_name,payment.amount from payment,customer 
+		 where payment.customer_id = 1 and payment.customer_id = customer.customer_id;
+
+select B.first_name,A.amount
+from payment A, customer
+where A.customer_id = B.customer_id;
+
+select customer.first_name, payment.amount
+from  payment
+inner join customer using(customer_id);
+
+select customer.first_name, sum(payment.amount)
+from  payment
+inner join customer on payment.customer_id = customer.customer_id 
+where payment.payment_date between '2005-07-01' and '2005-08-30'
+group by customer.first_name;
+/* VAI PARA O PI */
+
+
+
+
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
