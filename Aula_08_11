@@ -1,0 +1,51 @@
+	use sakila;
+	select * from customer;
+
+
+	select customer.first_name,address.address,address.district from customer
+			inner join address using(address_id)
+			where address.district like 'A%';
+	$$
+	delimiter $$
+	create trigger atualiza_estoque after insert on venda each row
+	begin
+	update produto set quantidade = old.quantidade - new.quantidade_venda
+				where codigo_prod = new.codigo_prod;
+	end
+	$$
+	delimiter $$
+	create trigger estorno_estoque before delete on venda for each row
+	begin
+	update produto set quantidade = old.quantidade + new.quantidade_venda
+				where codigo_prod = new.codigo_prod;
+	end
+	$$
+  
+  __________________________________________________________________________________________
+  
+  delimiter $$
+create procedure lista_endereco(valor varchar(20))
+begin
+select customer.first_name,address.address,address.district from customer
+	    inner join address using(address_id)
+        where address.district like valor;
+end
+$$
+ show procedure status;
+ call lista_endereco('A%');
+ 
+ create table venda(
+		codigo_venda int primary key auto_increment,
+        codigo_prod int, 
+        quantidade_venda int
+ )
+ create table produto(
+		codigo_prod int primary key auto_increment,
+        descricao varchar(20),
+        quantidade int,
+        valor decimal(9,2)
+ )
+ insert into produto(descricao,quantidade,valor)
+			values ('Lápis',30,2.5);
+select * from produto; 
+ 
